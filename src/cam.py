@@ -2,6 +2,7 @@ from configparser import RawConfigParser
 import os
 import cv2
 from datetime import datetime
+from src.zip import zip_video
 
 def record_video(config:RawConfigParser):
     folder = str(config["FOLDERS"]["DIR"])
@@ -52,7 +53,8 @@ def record_video(config:RawConfigParser):
     webcam.release()
     out.release()
     cv2.destroyAllWindows()
-    
+    print("The video is recorded")
+    zip_video(config,video_path,video_filename)
     
     
 """
