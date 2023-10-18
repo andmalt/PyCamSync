@@ -16,8 +16,8 @@ def loadIni(filename):
         sys.exit(1)
 
 
-def main(config:RawConfigParser):
-    record_video(config)
+def main(config:RawConfigParser,fps:float,size):
+    record_video(config,fps,size)
     # while True:
     #     time.sleep(120)
     #     try:
@@ -34,6 +34,10 @@ if __name__ == "__main__":
 
     parser.add_argument('-i', '--ini', help='Path to INI file (default ./pycamsync.ini)',
                         action='store', required=False, default='./pycamsync.ini')
+    parser.add_argument('-f', '--fps', help='Set your desired fps example 30',
+                        action='store', required=False, default='30')
+    parser.add_argument('-s', '--size', help='Set your desired resolution example (640,480)',
+                        action='store', required=False, default='[640 , 480]')
 
     print("\nPyCamSync Version 1.0")
     print("--------------------------------------------------")
@@ -41,7 +45,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    # Lettura del file di configurazione
+    # Reading the configuration file
     config = loadIni(args.ini)
 
-    main(config)
+    main(config,float(args.fps),args.size)

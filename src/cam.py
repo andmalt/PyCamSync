@@ -4,16 +4,16 @@ import cv2
 from datetime import datetime
 from src.zip import zip_video
 
-def record_video(config:RawConfigParser):
+def record_video(config:RawConfigParser,fps:float,size):
     folder = str(config["FOLDERS"]["DIR"])
     
     print("Waiting....")
-    # Accendi la webcam
+    # Turn on the webcam
     webcam = cv2.VideoCapture(0)
 
-    # Verifica se la webcam è stata aperta correttamente
+    # Check if the webcam is opened correctly
     if not webcam.isOpened():
-        print("Impossibile accedere alla webcam")
+        print("Unable to access the webcam")
         return
 
     date = datetime.now()
@@ -29,27 +29,27 @@ def record_video(config:RawConfigParser):
         pass
     
     video_path = os.path.join(directory_path,video_filename)
-    # Imposta il codec e crea un oggetto VideoWriter per salvare il video
+    # Set the codec and create a VideoWriter object to save the video
     fourcc = cv2.VideoWriter_fourcc(*"XVID")
-    out = cv2.VideoWriter(video_path, fourcc, 30.0, (640, 480)) # HD 1280 - 720
+    out = cv2.VideoWriter(video_path, fourcc, fps, [640,480]) # HD 1280 - 720
     print('Video is recording')
     
     while True:
-        # Leggi un frame dalla webcam
+        # Read a frame from the webcam
         ret, frame = webcam.read()
 
         if ret:
-            # Scrivi il frame nel video
+            # Write the frame in the video
             out.write(frame)
 
-            # Visualizza il frame
+            # View the frame
             cv2.imshow("Webcam", frame)
 
-        # Interrompi la registrazione se viene premuto il tasto 'q'
+        # Stop recording if 'q' button is pressed
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-    # Rilascia le risorse
+    # Release resources
     webcam.release()
     out.release()
     cv2.destroyAllWindows()
