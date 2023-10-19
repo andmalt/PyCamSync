@@ -7,8 +7,8 @@ from src.zip import zip_video
 
 def record_video(config:RawConfigParser,fps:float,size:str,args_time):
     folder = str(config["FOLDERS"]["DIR"])
-    modified_size = size.split(',')
-    frame_size = [int(size) for size in modified_size]
+    # modified_size = size.split(',')
+    # frame_size = [int(size) for size in modified_size]
     # print(frame_size)
     print("Waiting....")
     # Turn on the webcam
@@ -34,7 +34,8 @@ def record_video(config:RawConfigParser,fps:float,size:str,args_time):
     video_path = os.path.join(folder,video_filename)
     # Set the codec and create a VideoWriter object to save the video
     fourcc = cv2.VideoWriter_fourcc(*"XVID")
-    out = cv2.VideoWriter(video_path, fourcc, fps, frame_size) # HD 1280 - 720
+    # Leave the frame size in the default configuration, because if it is changed it will not work.
+    out = cv2.VideoWriter(video_path, fourcc, fps, [640,480])
     print('Video is recording')
     start_time = time.time()
     max_time = args_time
@@ -61,9 +62,3 @@ def record_video(config:RawConfigParser,fps:float,size:str,args_time):
     cv2.destroyAllWindows()
     print("The video is recorded")
     zip_video(config,video_path,video_filename)
-    
-    
-"""
-25 fps, 640*480  12mb min
-webcam logitech c270 HD
-"""

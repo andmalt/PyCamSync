@@ -35,8 +35,8 @@ if __name__ == "__main__":
                         action='store', required=False, default='./pycamsync.ini')
     parser.add_argument('-f', '--fps', help='Set your desired fps example: 30',
                         action='store', required=False, type=float,default='30')
-    parser.add_argument('-s', '--size', help='Set your desired resolution example: 640,480 ',
-                        action='store', required=False, default='640,480')
+    # parser.add_argument('-s', '--size', help='Set your desired resolution example: 640,480 ',
+    #                     action='store', required=False, default='640,480')
     parser.add_argument('-t', '--time', help='Set the maximum time of videos in seconds.',
                         action='store', required=False,type=int, default='600')
 
