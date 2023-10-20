@@ -16,14 +16,13 @@ def loadIni(filename):
         sys.exit(1)
 
 
-def main(config:RawConfigParser,fps:float,size,args_time):
+def main(config:RawConfigParser,fps:float,args_time):
     while True:
         try:
-            record_video(config,fps,size,args_time)
+            record_video(config,fps,args_time)
         except Exception as e:
             print("Exception webcam")
             print(e)
-        time.sleep(args_time + 2)
 
 
 if __name__ == "__main__":
@@ -50,4 +49,4 @@ if __name__ == "__main__":
     # Reading the configuration file
     config = loadIni(args.ini)
 
-    main(config,args.fps,args.size,args.time)
+    main(config,args.fps,args.time)

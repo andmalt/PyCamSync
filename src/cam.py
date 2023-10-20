@@ -5,7 +5,7 @@ import cv2
 from datetime import datetime
 from src.zip import zip_video
 
-def record_video(config:RawConfigParser,fps:float,size:str,args_time):
+def record_video(config:RawConfigParser,fps:float,args_time):
     folder = str(config["FOLDERS"]["DIR"])
     # modified_size = size.split(',')
     # frame_size = [int(size) for size in modified_size]
